@@ -1,0 +1,24 @@
+{
+  "name": "hueslightweb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jbone187/hueslightweb.git"
+  },
+  "author": "Jasen Green",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jbone187/hueslightweb/issues"
+  },
+  "homepage": "https://github.com/Jbone187/hueslightweb#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "node-hue-api": "^2.4.4"
+  }
+}
