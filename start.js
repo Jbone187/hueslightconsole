@@ -11,14 +11,14 @@ let displayError = function(err) {
 };
 
 let host = "10.0.0.115",
-  username = "",
+  username = "Yh9QU2CRGN76hIqgHYsqUAXkYK5ygh8wfpSEK37H",
   api = new HueApi(host, username),
   state = lightState.create();
 
 // Now turn on the lamp
 
-function* run() {
-  yield state.rgb(0, 0, 153);
+function setOne() {
+  state.rgb(0, 0, 153);
 
   api.setLightState(4, state.on(), function(err, result) {
     if (err) throw err;
@@ -29,8 +29,10 @@ function* run() {
     if (err) throw err;
     displayResult(result);
   });
+}
 
-  yield setTimeout(function() {
+function setTwo() {
+  setTimeout(function() {
     state.rgb(206, 0, 0);
 
     api.setLightState(4, state.on(), function(err, result) {
@@ -43,6 +45,12 @@ function* run() {
       displayResult(result);
     });
   }, 5000);
+}
+
+function* run() {
+  yield setOne();
+
+  yield setTwo();
 }
 
 setInterval(function() {
