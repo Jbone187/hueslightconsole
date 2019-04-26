@@ -1,20 +1,20 @@
-let hue = require("node-hue-api"),
+const hue = require("node-hue-api"),
   HueApi = hue.HueApi,
   lightState = hue.lightState;
 
-let inquirer = require("inquirer");
+const inquirer = require("inquirer");
 
-let displayResult = function(result) {
+let displayResult = function (result) {
   console.log(result);
 };
 
-let displayError = function(err) {
+let displayError = function (err) {
   console.error(err);
 };
 
 // Phillip hueslight api connection string
 
-let host = "10.0.0.115",
+const host = "10.0.0.115",
   username = "",
   api = new HueApi(host, username),
   state = lightState.create();
@@ -22,18 +22,17 @@ let host = "10.0.0.115",
 // Command line interface
 
 inquirer
-  .prompt([
-    {
+  .prompt([{
       type: "list",
       name: "BC1",
       message: "Please select first bulb color",
-      choices: ["Red", "Blue", "Green", "Purple"]
+      choices: ["Red", "Blue", "Green", "Purple", "Orange"]
     },
     {
       type: "list",
       name: "BC2",
       message: "Please select second bulb color",
-      choices: ["Red", "Blue", "Green", "Purple"]
+      choices: ["Red", "Blue", "Green", "Purple", "Orange"]
     }
   ])
   .then(answers => {
@@ -49,23 +48,25 @@ inquirer
           state.rgb(23, 88, 7);
         } else if (color === "Purple") {
           state.rgb(160, 32, 240);
+        } else if (color === "Orange") {
+          state.rgb(255, 165, 0);
         }
       }
       answersBC1(answers.BC1);
 
-      api.setLightState(4, state.on(), function(err, result) {
+      api.setLightState(4, state.on(), function (err, result) {
         if (err) throw err;
         displayResult(result);
       });
 
-      api.setLightState(6, state.on(), function(err, result) {
+      api.setLightState(6, state.on(), function (err, result) {
         if (err) throw err;
         displayResult(result);
       });
     }
 
     function setTwo() {
-      setTimeout(function() {
+      setTimeout(function () {
         function answersBC1(color) {
           if (color === "Red") {
             state.rgb(255, 0, 0);
@@ -75,16 +76,18 @@ inquirer
             state.rgb(23, 88, 7);
           } else if (color === "Purple") {
             state.rgb(160, 32, 240);
+          } else if (color === "Orange") {
+            state.rgb(255, 165, 0);
           }
         }
         answersBC1(answers.BC2);
 
-        api.setLightState(4, state.on(), function(err, result) {
+        api.setLightState(4, state.on(), function (err, result) {
           if (err) throw err;
           displayResult(result);
         });
 
-        api.setLightState(6, state.on(), function(err, result) {
+        api.setLightState(6, state.on(), function (err, result) {
           if (err) throw err;
           displayResult(result);
         });
@@ -98,7 +101,7 @@ inquirer
       yield setTwo();
     }
 
-    setInterval(function() {
+    setInterval(function () {
       let partylight = run();
       partylight.next();
       partylight.next();
