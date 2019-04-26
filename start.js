@@ -12,12 +12,14 @@ let displayError = function(err) {
   console.error(err);
 };
 
+// Phillip hueslight api connection string
+
 let host = "10.0.0.115",
-  username = "",
+  username = "Yh9QU2CRGN76hIqgHYsqUAXkYK5ygh8wfpSEK37H",
   api = new HueApi(host, username),
   state = lightState.create();
 
-// Now turn on the lamp
+// Command line interface
 
 inquirer
   .prompt([
@@ -35,9 +37,7 @@ inquirer
     }
   ])
   .then(answers => {
-    console.log(
-      `You have selected ${answers.BC1} and ${answers.BC2} as your bulb color's`
-    );
+    // Turn lights on and associate color based off selected inputs
 
     function setOne() {
       function answersBC1(color) {
@@ -90,6 +90,7 @@ inquirer
         });
       }, 5000);
     }
+    // Push functions through a generator for flow control
 
     function* run() {
       yield setOne();
@@ -102,4 +103,9 @@ inquirer
       partylight.next();
       partylight.next();
     }, 10000);
+
+    console.log(
+      "\n",
+      `You have selected ${answers.BC1} and ${answers.BC2} as your bulb color's`
+    );
   });
