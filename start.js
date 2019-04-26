@@ -15,7 +15,7 @@ let displayError = function(err) {
 // Phillip hueslight api connection string
 
 let host = "10.0.0.115",
-  username = "Yh9QU2CRGN76hIqgHYsqUAXkYK5ygh8wfpSEK37H",
+  username = "",
   api = new HueApi(host, username),
   state = lightState.create();
 
